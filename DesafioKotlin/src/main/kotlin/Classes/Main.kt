@@ -64,11 +64,20 @@ fun main(){
     var curso1 = Curso("Android", 20002, professorTitular1, professorAdjunto1, 20)
     var listaCursos = mutableListOf(curso, curso1)
 
-    println(curso.adicionarUmAluno(aluno))
-    println(curso.adicionarUmAluno(aluno1))
-    println(curso.adicionarUmAluno(aluno))
+    //println(curso.adicionarUmAluno(aluno))
+    //println(curso.adicionarUmAluno(aluno1))
+    //println(curso.adicionarUmAluno(aluno))
 
     println(curso.listaAlunos)
+    curso.excluirAluno(aluno1)
+    println(curso.listaAlunos)
+    curso.excluirAluno(aluno)
+    println(curso.listaAlunos)
+    curso.excluirAluno(aluno)
+
+
+
+
 
 
     println("---------------------------------------------------------------------------------------------------------")

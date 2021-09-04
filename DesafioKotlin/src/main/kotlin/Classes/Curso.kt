@@ -50,6 +50,19 @@ class Curso(
 
     }
 
+    // 2. Criar um método na classe Curso que permita excluir um aluno da lista de alunos do curso.
+    fun excluirAluno(umAluno: Alunos) {
+        if(listaAlunos.isEmpty()){ // se a lista estiver vazia, não irá excluir nenhum dado.
+            println("Não foi possível excluir os dados do aluno!")
+        }else{
+            listaAlunos.remove(umAluno)
+            println("Os dados do aluno ${umAluno.nome} foram excluídos!")
+        }
+
+    }
+
+
+
 
 
 }
