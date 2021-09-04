@@ -9,10 +9,13 @@ class Curso(
     var codigoCurso: Int,
     var professorTitular: ProfessorTitular,
     var professorAdjunto: ProfessorAdjunto,
-    var quantidadeMaximaAlunos: Int,
-    var listaAlunos: MutableList<Alunos>
+    var quantidadeMaximaAlunos: Int = 50,
+
 
 ) {
+
+    var listaAlunos = ArrayList<Alunos>()
+    var alunosAdicionados = 0
 
     //sobrescrevendo as funções equals(), toString() e hashCode():
 
@@ -30,5 +33,23 @@ class Curso(
     override fun hashCode(): Int {
         return this.codigoCurso
     }
+
+
+    // 1. Criar um método na classe Curso que permita adicionar um aluno à lista.
+    // O método retornará true se o aluno puder ser adicionado ou false caso não haja vagas disponíveis.
+
+    fun adicionarUmAluno(umAluno: Alunos): Boolean{
+        if(alunosAdicionados < quantidadeMaximaAlunos){
+            listaAlunos.add(umAluno)
+            alunosAdicionados ++
+            return true
+        } else {
+            println("Não há vagas disponíveis!")
+            return false
+        }
+
+    }
+
+
 
 }

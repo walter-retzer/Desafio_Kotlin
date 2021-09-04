@@ -7,6 +7,7 @@ fun main(){
     //PARTE A: criando as variáveis alunos:
     var aluno = Alunos("Mickey", "Mouse", 1 )
     var aluno1 = Alunos("Minnie", "Mouse", 2 )
+
     var listaAlunos = mutableListOf(aluno, aluno1)
 
     //comparando se aluno e aluno1 são iguais:
@@ -59,10 +60,18 @@ fun main(){
 
     //PARTE E: criando as variáveis do curso:
 
-    var curso = Curso("FullStack", 20001, professorTitular, professorAdjunto, 40, listaAlunos)
-    var curso1 = Curso("Android", 20002, professorTitular1, professorAdjunto1, 20, listaAlunos)
+    var curso = Curso("FullStack", 20001, professorTitular, professorAdjunto, 3)
+    var curso1 = Curso("Android", 20002, professorTitular1, professorAdjunto1, 20)
     var listaCursos = mutableListOf(curso, curso1)
 
+    println(curso.adicionarUmAluno(aluno))
+    println(curso.adicionarUmAluno(aluno1))
+    println(curso.adicionarUmAluno(aluno))
+
+    println(curso.listaAlunos)
+
+
+    println("---------------------------------------------------------------------------------------------------------")
    //comparando se curso e curso1 são iguais:
     println(curso == curso1)
     println(curso.listaAlunos)
