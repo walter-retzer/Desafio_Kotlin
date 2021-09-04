@@ -1,5 +1,7 @@
 package Classes
 
+import java.util.*
+
 fun main(){
 
     //PARTE A: criando as variáveis alunos:
@@ -18,6 +20,8 @@ fun main(){
     println(aluno.hashCode())
     println(aluno1.hashCode())
 
+    println("---------------------------------------------------------------------------------------------------------")
+
        //PARTE D: criando as variáveis dos Professores Adjunto e Titular:
     var professorTitular = ProfessorTitular("Nicloas", "Tesla", 1500, 9901, "Java")
     var professorTitular1 = ProfessorTitular("Stephen", "Hawking", 1354, 9901, "Kotlin")
@@ -25,13 +29,15 @@ fun main(){
     //comparando se professorTitular e professorTitular1 são iguais:
     println(professorTitular == professorTitular1)
 
-    //    //imprimindo na tela as informações dos Professores Titulares:
+    //imprimindo na tela as informações dos Professores Titulares:
     println(professorTitular.toString())
     println(professorTitular1.toString())
 
     //imprimindo os hashCode() de cada Professor Titular, o qual será o valor do seu códigoProfessor:
     println(professorTitular.hashCode())
     println(professorTitular1.hashCode())
+
+    println("---------------------------------------------------------------------------------------------------------")
 
     var professorAdjunto = ProfessorAdjunto("Albert", "Einstein", 957,8802, 25954)
     var professorAdjunto1 = ProfessorAdjunto("Isaac", "Newton",875,8802, 22222)
@@ -46,6 +52,8 @@ fun main(){
     //imprimindo os hashCode() de cada Professor Adjunto, o qual será o valor do seu códigoProfessor:
     println(professorAdjunto.hashCode())
     println(professorAdjunto1.hashCode())
+
+    println("---------------------------------------------------------------------------------------------------------")
 
     //PARTE E: criando as variáveis do curso:
 
@@ -63,5 +71,12 @@ fun main(){
     //imprimindo os hashCode() de cada curso, o qual será o valor do seu códigoCurso:
     println(curso.hashCode())
     println(curso1.hashCode())
+
+    println("---------------------------------------------------------------------------------------------------------")
+
+    //PARTE F: criando as variáveis da matricula:
+    var matricula = Matricula(aluno,curso)
+    println(matricula.dataMatricula)
+    println(matricula)
 
 }
