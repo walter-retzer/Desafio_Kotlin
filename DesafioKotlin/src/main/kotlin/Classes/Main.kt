@@ -33,6 +33,18 @@ fun main(){
     println(curso.hashCode())
     println(curso1.hashCode())
 
+    var professor = Professor("Nicolas", "Tesla", 500, 9901)
+    var professor1 = Professor("Albert", "Einstein", 850, 9902)
 
+    //comparando se professor e professor1 são iguais:
+    println(professor == professor1)
+
+    //imprimindo na tela as informações do curso:
+    println(professor.toString())
+    println(professor1.toString())
+
+    //imprimindo os hashCode() de cada curso, o qual será o valor do seu códigoCurso:
+    println(professor.hashCode())
+    println(professor1.hashCode())
 
 }
