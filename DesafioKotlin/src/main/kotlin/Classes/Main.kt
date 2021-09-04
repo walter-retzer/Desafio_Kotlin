@@ -33,18 +33,32 @@ fun main(){
     println(curso.hashCode())
     println(curso1.hashCode())
 
-    var professor = Professor("Nicolas", "Tesla", 500, 9901)
-    var professor1 = Professor("Albert", "Einstein", 850, 9902)
+    //PARTE D: criando as variáveis dos Professores Adjunto e Titular:
+    var professorTitular = ProfessorTitular("Nicloas", "Tesla", 1500, 9901, "Java")
+    var professorTitular1 = ProfessorTitular("Stephen", "Hawking", 1354, 9901, "Kotlin")
 
-    //comparando se professor e professor1 são iguais:
-    println(professor == professor1)
+    //comparando se professorTitular e professorTitular1 são iguais:
+    println(professorTitular == professorTitular1)
 
-    //imprimindo na tela as informações do curso:
-    println(professor.toString())
-    println(professor1.toString())
+    //    //imprimindo na tela as informações dos Professores Titulares:
+    println(professorTitular.toString())
+    println(professorTitular1.toString())
 
-    //imprimindo os hashCode() de cada curso, o qual será o valor do seu códigoCurso:
-    println(professor.hashCode())
-    println(professor1.hashCode())
+    //imprimindo os hashCode() de cada Professor Titular, o qual será o valor do seu códigoProfessor:
+    println(professorTitular.hashCode())
+    println(professorTitular1.hashCode())
 
+    var professorAdjunto = ProfessorAdjunto("Albert", "Einstein", 957,8802, 25954)
+    var professorAdjunto1 = ProfessorAdjunto("Isaac", "Newton",875,8802, 22222)
+
+    //comparando se professorAdjunto e professorAdjunto1 são iguais:
+    println(professorAdjunto == professorAdjunto1)
+
+    //    //imprimindo na tela as informações dos Professores Adjuntos:
+    println(professorAdjunto.toString())
+    println(professorAdjunto1.toString())
+
+    //imprimindo os hashCode() de cada Professor Adjunto, o qual será o valor do seu códigoProfessor:
+    println(professorAdjunto.hashCode())
+    println(professorAdjunto1.hashCode())
 }
