@@ -1,6 +1,6 @@
 package Classes
 
-class ProfessorTitular(nome: String, sobrenome: String, tempoDeCasa: Int, codigoProfessor: Int, var especialidade: String) :
+open class ProfessorTitular(nome: String, sobrenome: String, tempoDeCasa: Int, codigoProfessor: Int, var especialidade: String) :
     Professor(nome, sobrenome, tempoDeCasa, codigoProfessor) {
 
     //sobrescrevendo as funções equals(), toString() e hashCode():
