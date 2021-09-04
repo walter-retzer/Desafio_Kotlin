@@ -10,9 +10,10 @@ class Curso(
     var codigoCurso: Int,
     var professorTitular: ProfessorTitular,
     var professorAdjunto: ProfessorAdjunto,
-    var quantidadeMaximaAlunos: Int
+    var quantidadeMaximaAlunos: Int,
+    var listaAlunos: MutableList<Alunos>
 
-    ) {
+) {
 
     //sobrescrevendo as funções equals(), toString() e hashCode():
     override fun equals(other: Any?): Boolean {

@@ -1,6 +1,6 @@
 package Classes
 
-class Alunos(var nome: String, var sobrenome: String, var codigoAluno: Int) {
+open class Alunos(var nome: String, var sobrenome: String, var codigoAluno: Int) {
 
     //sobrescrevendo as funções equals(), toString() e hashCode():
     override fun equals(other: Any?): Boolean {
