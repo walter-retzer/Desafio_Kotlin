@@ -4,7 +4,7 @@ package Classes
 //(ProfessorTitular), um professor adjunto (ProfessorAdjunto), uma quantidade
 //máxima de alunos (Integer) e uma lista de alunos matriculados.
 
-class Curso(
+open class Curso(
     var nomeDoCurso: String,
     var codigoCurso: Int,
     var professorTitular: ProfessorTitular,
