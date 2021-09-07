@@ -103,12 +103,21 @@ fun main() {
 
     println("---------------------------------------------------------------------------------------------------------")
 
-    //PARTE H (item1): implementando a função registrarCurso()
+    //PARTE I (item1): implementando a função registrarCurso()
     var managerDH = DigitalHouseManger(listaAlunos, listaProfessoresTitular, listaProfessorAdjunto, listaMatriculas)
 
     println("Lista de Cursos Registrados:")
     managerDH.registrarCurso("FullStack", 90001, 2)
     managerDH.registrarCurso("Android", 90002, 2)
+
+    println("---------------------------------------------------------------------------------------------------------")
+
+    //PARTE I (item2): implementando a função excluirCurso()
+
+    println(managerDH.listaDeCurso)
+    managerDH.excluirCurso(90008)
+    managerDH.excluirCurso(90001)
+    println(managerDH.listaDeCurso)
 
     println("---------------------------------------------------------------------------------------------------------")
 
