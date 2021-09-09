@@ -10,13 +10,16 @@ class DigitalHouseManger() {
     // usado o Map para armazenar o nome do curso na posição chave e código e quantidade máxima de alunos na posição valores como lista
     // listaDeCursos = {key = nomeDoCurso, value: codigoDoCurso, quantidadeMaximaAlunos}
     var listaDeCurso = mutableMapOf<String, List<Int>>()
+
     // lista aux para armazenar código do curso e quantidade maxima de alunos como lista.
     var listaAuxCurso = mutableListOf<Int>() // listaAuxCurso = [codigoDoCurso, quantidadeMaximaAlunos]
 
     // listaDeProfessores = {key = nomeDoProfessor, value: listaAuxProfessor[]}
     var listaDeProfessores = mutableMapOf<Int, List<Any>>()
+
     //listaAuxProfessoresAdjuntos = [nome do professor, o sobrenome, quantidade de horas disponíveis para monitoria, tempoDeCasa]
     var listaAuxProfessoresAdjuntos = mutableListOf<Any>()
+
     //listaAuxProfessores = [nome do professor, o sobrenome, o código e a especialidade, tempoDeCasa]
     var listaAuxProfessoresTitular = mutableListOf<Any>()
 
@@ -58,7 +61,7 @@ class DigitalHouseManger() {
                 if (chave.value.contains(codigoDigitado)) { //checa se na posição valor contém o código digitado!
                     auxChecaCodigoDigitado = true  // caso haja o código a variável auxChecaCodigoDigitado = true
                     aux = chave.key // armazena-se o valor da chave, para posteriormente excluir essa posição da lista
-                    break // interrompe o laço for, pois o código digitado já foi encontrado
+                    break // interrompe o laço for, pois, o código digitado já foi encontrado
                 }
             }
         }
@@ -82,8 +85,8 @@ class DigitalHouseManger() {
 
     fun registrarProfessorAdjunto(nome: String, sobrenome: String, codigoProfessor: Int, quantidadeDeHoras: Int) {
         var tempoDeCasa = 0 // tempo inicial será zero
-        // listaAuxProfessoresAdjuntos = [nome, sobrenome, codigoProfessor, quantidadeDeHoras, tempoDeCasa]
-        listaAuxProfessoresAdjuntos = mutableListOf(nome, sobrenome, codigoProfessor, quantidadeDeHoras, tempoDeCasa)
+        // listaAuxProfessoresAdjuntos = [nome, sobrenome, quantidadeDeHoras, tempoDeCasa]
+        listaAuxProfessoresAdjuntos = mutableListOf(nome, sobrenome, quantidadeDeHoras, tempoDeCasa)
         // listaDeProfessores = {key = codigoProfessor, value = listaAuxProfessorAdjunto}
         listaDeProfessores.put(codigoProfessor, listaAuxProfessoresAdjuntos) // armazena dados na listaDeProfessores
         println(listaDeProfessores)
@@ -97,8 +100,8 @@ class DigitalHouseManger() {
 
     fun registrarProfessorTitular(nome: String, sobrenome: String, codigoProfessor: Int, especialidade: String) {
         var tempoDeCasa = 0
-        //listaAuxProfessoresTitular = [nome, sobrenome, codigoProfessor, especialidade, tempoDeCasa]
-        listaAuxProfessoresTitular = mutableListOf(nome, sobrenome, codigoProfessor, especialidade, tempoDeCasa)
+        //listaAuxProfessoresTitular = [nome, sobrenome, especialidade, tempoDeCasa]
+        listaAuxProfessoresTitular = mutableListOf(nome, sobrenome, especialidade, tempoDeCasa)
         //listaDeProfessores = {key = codigoProfessor, value = listaAuxProfessoresTitular}
         listaDeProfessores.put(codigoProfessor, listaAuxProfessoresTitular) // armazena dados na listaDeProfessores
         println(listaDeProfessores)
@@ -114,20 +117,19 @@ class DigitalHouseManger() {
         var auxChecaCodigoProfessor = false //variavel aux para verificar se há a lista de curso contém o código digitado
         var aux = 0 // variavel auxiliar que armazena a posição da chave, caso haja o códigoProfessor
 
-        // utilização de 2 loops for para passar pelos parâmetros de chave e valor de cada item da lista de Professores:
+        // utilização de loop for para passar pelos parâmetros de cada chave da lista de Professores:
         for (chave in listaDeProfessores) {
-            for (valor in chave.value) {
-                if (chave.value.contains(codigoProfessor)) { //checa se na posição valor contém o códigoProfessor
-                    auxChecaCodigoProfessor = true  // caso haja o códigoProfessor a variável auxChecaCodigoProfessor = true
-                    aux = chave.key // armazena-se o valor da chave, para posteriormente excluir essa posição da lista de Professores
-                    break // interrompe o laço for, pois o códigoProfessor já foi encontrado.
-                }
+            if (chave.key == codigoProfessor) { // verifica se a posição chave.key == codigoProfessor.
+                auxChecaCodigoProfessor = true  // caso haja o códigoProfessor a variável auxChecaCodigoProfessor = true
+                aux = chave.key // armazena-se o valor da chave, para posteriormente excluir essa posição da lista de Professores
+                break // interrompe o laço for, pois, o códigoProfessor já foi encontrado.
             }
         }
-
+        //se caso houver o códigoProfessor, os dados referente ao codigoProfessor serão excluídos da Lista de Professores.
         if (auxChecaCodigoProfessor) {
             println("Código Professor: ${codigoProfessor} foi excluído!")
             listaDeProfessores.remove(aux)
+            //se caso não houver o códigoProfessor, retorna uma mensagem para verificar código digitado.
         } else {
             println("Código Professor: ${codigoProfessor} não foi excluído! Por Favor verifique o código digitado!")
         }
