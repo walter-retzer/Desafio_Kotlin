@@ -105,5 +105,32 @@ class DigitalHouseManger() {
         contadorProfessores++ //acresce 1 ao contadorProfessores
     }
 
+    // Parte I - Item05. Criar um método na classe DigitalHouseManager que permita excluir um professor.
+    // O método recebe como parâmetro o código do professor. O método deve utilizar o código do professor para
+    // encontrá-lo na lista de professores e eliminá-lo da lista.
+
+
+    fun excluirProfessor(codigoProfessor: Int) {
+        var auxChecaCodigoProfessor = false //variavel aux para verificar se há a lista de curso contém o código digitado
+        var aux = 0 // variavel auxiliar que armazena a posição da chave, caso haja o códigoProfessor
+
+        // utilização de 2 loops for para passar pelos parâmetros de chave e valor de cada item da lista de Professores:
+        for (chave in listaDeProfessores) {
+            for (valor in chave.value) {
+                if (chave.value.contains(codigoProfessor)) { //checa se na posição valor contém o códigoProfessor
+                    auxChecaCodigoProfessor = true  // caso haja o códigoProfessor a variável auxChecaCodigoProfessor = true
+                    aux = chave.key // armazena-se o valor da chave, para posteriormente excluir essa posição da lista de Professores
+                    break // interrompe o laço for, pois o códigoProfessor já foi encontrado.
+                }
+            }
+        }
+
+        if (auxChecaCodigoProfessor) {
+            println("Código Professor: ${codigoProfessor} foi excluído!")
+            listaDeProfessores.remove(aux)
+        } else {
+            println("Código Professor: ${codigoProfessor} não foi excluído! Por Favor verifique o código digitado!")
+        }
+    }
 }
 

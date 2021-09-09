@@ -128,11 +128,27 @@ fun main() {
 
     println("---------------------------------------------------------------------------------------------------------")
 
-    //PARTE I (item4): implementando a função registarProfessorAdjunto()
+    //PARTE I (item4): implementando a função registarProfessorTitular()
 
     managerDH.registrarProfessorTitular("Albert", "Einstein", 77001, "Android")
     managerDH.registrarProfessorTitular("Stephen", "Hawking", 77002, "FullStack")
 
     println("---------------------------------------------------------------------------------------------------------")
+
+    //PARTE I (item5): implementando a função excluirProfessor()
+    println(managerDH.listaDeProfessores)
+    managerDH.excluirProfessor(77001)
+    println(managerDH.listaDeProfessores)
+    managerDH.excluirProfessor(77002)
+    println(managerDH.listaDeProfessores)
+    managerDH.excluirProfessor(88001)
+    println(managerDH.listaDeProfessores)
+    managerDH.excluirProfessor(88002)
+    println(managerDH.listaDeProfessores)
+    managerDH.excluirProfessor(88003)
+    println(managerDH.listaDeProfessores)
+
+    println("---------------------------------------------------------------------------------------------------------")
+
 
 }
