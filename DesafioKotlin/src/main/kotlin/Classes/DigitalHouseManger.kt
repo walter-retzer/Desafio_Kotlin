@@ -1,92 +1,72 @@
 package Classes
 
-// 1. Criar um diagrama de classes que modele a classe DigitalHouseManager.
+
+class DigitalHouseManger() {
+
+// Parte G - Item01: Criar um diagrama de classes que modele a classe DigitalHouseManager.
 // A princípio, DigitalHouseManager tem uma lista de alunos, uma lista de professores,
 // uma lista de cursos e uma lista de matrículas
 
-class DigitalHouseManger(
-    var listaAlunos: MutableList<Alunos>,
-    var listaProfessorTitular: MutableList<ProfessorTitular>,
-    var listaProfessorAdjunto: MutableList<ProfessorAdjunto>,
-    var listaMatriculas: MutableList<Matricula>
-) {
-    var contador: Int = 1
-    var nomeDoCurso: String = ""
-    var codigoDoCurso: Int = 0
-    var quantidadeMaximaAlunos: Int = 0
+    // usado o Map para armazenar o nome do curso na posição chave e código e quantidade máxima de alunos na posição valores como lista
+    // listaDeCursos = {key = nomeDoCurso, value: codigoDoCurso, quantidadeMaximaAlunos}
+    var listaDeCurso = mutableMapOf<String, List<Int>>()
 
-    var listaAux = mutableListOf(nomeDoCurso, codigoDoCurso, quantidadeMaximaAlunos)
+    // lista aux para armazenar código do curso e quantidade maxima de alunos como lista.
+    var listaAuxCurso = mutableListOf<Int>() // listaAuxCurso = [codigoDoCurso, quantidadeMaximaAlunos]
 
-    //var listaDeCurso = mutableMapOf(contador to listaAux)
-    var listaDeCurso = mutableMapOf<Int, List<Any>>()
+    var listaAlunos = mutableMapOf<Int, List<Any>>()
+    var listaDeProfessores = mutableMapOf<Int, List<Any>>()
+    var listaMatriculas = mutableMapOf<Int, List<Any>>()
 
 
-    //sobreescrevendo a Função toString() para exibir informações da Composição da DigitalHouseManager:
-    override fun toString(): String {
-        return "Digital House Manager composta por: " +
-                "\nLista de Alunos: ${listaAlunos}" +
-                "\nLista de Cursos: ${listaDeCurso}" +
-                "\nLista de Professores Titulares: ${listaProfessorTitular}" +
-                "\nLista de Professores Adjuntos: ${listaProfessorAdjunto}" +
-                "\nLista de Alunos Matrículados: ${listaMatriculas}"
-    }
+    //Parte I - Item01: Criar um método na classe DigitalHouseManager que permita registrar um
+    //curso. O método recebe como parâmetros o nome do curso, o código e a
+    //quantidade máxima de alunos admitidos. O método deve criar um curso com
+    //os dados correspondentes e adicioná-lo à lista de cursos.
 
-    // 1. Criar um método na classe DigitalHouseManager que permita registrar um curso.
-    // O método recebe como parâmetros o nome do curso, o código e a quantidade máxima de alunos admitidos.
-    // O método deve criar um curso com os dados correspondentes e adicioná-lo à lista de cursos.
+    var contadorCursos: Int = 0  // variável para contar quantos cursos foram registrados.
 
+    // função registrarCurso:
     fun registrarCurso(nomeDoCurso: String, codigoDoCurso: Int, quantidadeMaximaAlunos: Int) {
 
-        listaAux = mutableListOf(nomeDoCurso, codigoDoCurso, quantidadeMaximaAlunos)
-        listaDeCurso[contador] = listaAux
+        // a listaAuxCurso recebe os parametros "Int": código do curso e quantidade Máxima de Alunos
+        // listaAuxCurso[codigoDoCurso, quantidadeMaximaAlunos]
+        listaAuxCurso = mutableListOf(codigoDoCurso, quantidadeMaximaAlunos)
+        // insere os dados na lista de curso:
+        listaDeCurso.put(nomeDoCurso, listaAuxCurso) // {key = nomeDoCurso, value: listaAuxCurso}
         println(listaDeCurso)
-        contador++
-
+        contadorCursos++ //acresce 1 ao contadorCurso
 
     }
 
-    //2. Criar um método na classe DigitalHouseManager que permita excluir um curso.
+    // Parte I - Item02: Criar um método na classe DigitalHouseManager que permita excluir um curso.
     // O método recebe como parâmetro o código do curso. O método deve utilizar o código do curso para encontrá-lo
     // na lista de cursos e excluí-lo da lista.
 
     fun excluirCurso(codigoDigitado: Int) {
-        var aux1 = false
-        var aux = 0
+        var auxChecaCodigoDigitado = false //variavel aux para verificar se há a lista de curso contém o código digitado
+        var aux = " " // variavel auxiliar que armazena a posição da chave, caso haja o código digitado
 
+        // utilização de 2 loops for para passar pelos parâmetros de chave e valor de cada item da lista de cursos:
         for (chave in listaDeCurso) {
             for (valor in chave.value) {
-                if (chave.value.contains(codigoDigitado)) {
-                    aux1 = true
-                    aux = chave.key
-                    break
+                if (chave.value.contains(codigoDigitado)) { //checa se na posição valor contém o código digitado!
+                    auxChecaCodigoDigitado = true  // caso haja o código a variável auxChecaCodigoDigitado = true
+                    aux = chave.key // armazena-se o valor da chave, para posteriormente excluir essa posição da lista
+                    break // interrompe o laço for, pois o código digitado já foi encontrado
                 }
             }
         }
-        if (aux1) {
+
+        // caso haja o código digitado, irá excluir da lista de curso a posição armazenada pela variável aux
+        if (auxChecaCodigoDigitado) {
             listaDeCurso.remove(aux)
             println("Curso ${codigoDigitado} foi excluído!")
+        // caso não haja o código digitado, irá enviar a mensagem para verificar o código digitado!
         } else {
             println("Curso ${codigoDigitado} não foi excluído! Por Favor verifique o código digitado!")
         }
-
-        //println("Curso ${codigoDigitado} excluído!")
-
-
     }
-
-
-    fun devolverPecas(numero: Int) {
-//
-//        if (numero <= dicionario.size && numero > 0) {
-//            dicionario.remove(numero) // remove(key) - remove o valor da chave
-//            contador = 0 // reseta contador para que poder novamente ser incluido um item no endereço removido
-//            println("")
-//            println(yellow + "-------------------------------------------Devolução de Itens----------------------------------------------------------------------------------------------" + reset)
-//            println("Devolução dos Itens do Armario: ${numero}")
-//            println(yellow + "-----------------------------------------------------------------------------------------------------------------------------------------------------------" + reset)
-//            println("")
-
-    }
-
 
 }
+
