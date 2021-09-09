@@ -128,4 +128,11 @@ fun main() {
 
     println("---------------------------------------------------------------------------------------------------------")
 
+    //PARTE I (item4): implementando a função registarProfessorAdjunto()
+
+    managerDH.registrarProfessorTitular("Albert", "Einstein", 77001, "Android")
+    managerDH.registrarProfessorTitular("Stephen", "Hawking", 77002, "FullStack")
+
+    println("---------------------------------------------------------------------------------------------------------")
+
 }

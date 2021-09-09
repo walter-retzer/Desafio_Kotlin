@@ -13,20 +13,21 @@ class DigitalHouseManger() {
     // lista aux para armazenar código do curso e quantidade maxima de alunos como lista.
     var listaAuxCurso = mutableListOf<Int>() // listaAuxCurso = [codigoDoCurso, quantidadeMaximaAlunos]
 
-    // listaDeProfessores = {key = nomeDoProfessor, value: listaAuxProfessor[nome do professor, o sobrenome, quantidade
-    // de horas disponíveis para monitoria, tempoDeCasa]}
+    // listaDeProfessores = {key = nomeDoProfessor, value: listaAuxProfessor[]}
     var listaDeProfessores = mutableMapOf<Int, List<Any>>()
-    //listaAuxProfessores = [nome do professor, o sobrenome, quantidade de horas disponíveis para monitoria, tempoDeCasa]
-    var listaAuxProfessores = mutableListOf<Any>()
+    //listaAuxProfessoresAdjuntos = [nome do professor, o sobrenome, quantidade de horas disponíveis para monitoria, tempoDeCasa]
+    var listaAuxProfessoresAdjuntos = mutableListOf<Any>()
+    //listaAuxProfessores = [nome do professor, o sobrenome, o código e a especialidade, tempoDeCasa]
+    var listaAuxProfessoresTitular = mutableListOf<Any>()
 
     var listaAlunos = mutableMapOf<Int, List<Any>>()
     var listaMatriculas = mutableMapOf<Int, List<Any>>()
 
 
-    //Parte I - Item01: Criar um método na classe DigitalHouseManager que permita registrar um
-    //curso. O método recebe como parâmetros o nome do curso, o código e a
-    //quantidade máxima de alunos admitidos. O método deve criar um curso com
-    //os dados correspondentes e adicioná-lo à lista de cursos.
+    // Parte I - Item01: Criar um método na classe DigitalHouseManager que permita registrar um
+    // curso. O método recebe como parâmetros o nome do curso, o código e a
+    // quantidade máxima de alunos admitidos. O método deve criar um curso com
+    // os dados correspondentes e adicioná-lo à lista de cursos.
 
     var contadorCursos: Int = 0  // variável para contar quantos cursos foram registrados.
 
@@ -80,13 +81,29 @@ class DigitalHouseManger() {
     var contadorProfessores = 0
 
     fun registrarProfessorAdjunto(nome: String, sobrenome: String, codigoProfessor: Int, quantidadeDeHoras: Int) {
-        var tempoDeCasa = 0
-        listaAuxProfessores = mutableListOf(nome, sobrenome, codigoProfessor, quantidadeDeHoras, tempoDeCasa)
-        listaDeProfessores.put(codigoProfessor, listaAuxProfessores)
+        var tempoDeCasa = 0 // tempo inicial será zero
+        // listaAuxProfessoresAdjuntos = [nome, sobrenome, codigoProfessor, quantidadeDeHoras, tempoDeCasa]
+        listaAuxProfessoresAdjuntos = mutableListOf(nome, sobrenome, codigoProfessor, quantidadeDeHoras, tempoDeCasa)
+        // listaDeProfessores = {key = codigoProfessor, value = listaAuxProfessorAdjunto}
+        listaDeProfessores.put(codigoProfessor, listaAuxProfessoresAdjuntos) // armazena dados na listaDeProfessores
         println(listaDeProfessores)
-        contadorProfessores++
+        contadorProfessores++ //acresce 1 ao contadorProfessores
     }
 
+    // Parte I - Item04. Criar um método na classe DigitalHouseManager que permita registrar um
+    // professor titular. O método recebe como parâmetros o nome do professor, o sobrenome, o código e a especialidade.
+    // O tempo de casa inicial do professor será zero. O método deve criar um professor titular com os dados
+    // correspondentes e adicioná-lo à lista de professores.
+
+    fun registrarProfessorTitular(nome: String, sobrenome: String, codigoProfessor: Int, especialidade: String) {
+        var tempoDeCasa = 0
+        //listaAuxProfessoresTitular = [nome, sobrenome, codigoProfessor, especialidade, tempoDeCasa]
+        listaAuxProfessoresTitular = mutableListOf(nome, sobrenome, codigoProfessor, especialidade, tempoDeCasa)
+        //listaDeProfessores = {key = codigoProfessor, value = listaAuxProfessoresTitular}
+        listaDeProfessores.put(codigoProfessor, listaAuxProfessoresTitular) // armazena dados na listaDeProfessores
+        println(listaDeProfessores)
+        contadorProfessores++ //acresce 1 ao contadorProfessores
+    }
 
 }
 
