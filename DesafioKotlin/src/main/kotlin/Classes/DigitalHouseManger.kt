@@ -10,20 +10,21 @@ class DigitalHouseManger() {
     // usado o Map para armazenar o nome do curso na posição chave e código e quantidade máxima de alunos na posição valores como lista
     // listaDeCursos = {key = nomeDoCurso, value: codigoDoCurso, quantidadeMaximaAlunos}
     var listaDeCurso = mutableMapOf<String, List<Int>>()
-
     // lista aux para armazenar código do curso e quantidade maxima de alunos como lista.
     var listaAuxCurso = mutableListOf<Int>() // listaAuxCurso = [codigoDoCurso, quantidadeMaximaAlunos]
 
     // listaDeProfessores = {key = nomeDoProfessor, value: listaAuxProfessor[]}
     var listaDeProfessores = mutableMapOf<Int, List<Any>>()
-
     //listaAuxProfessoresAdjuntos = [nome do professor, o sobrenome, quantidade de horas disponíveis para monitoria, tempoDeCasa]
     var listaAuxProfessoresAdjuntos = mutableListOf<Any>()
-
     //listaAuxProfessores = [nome do professor, o sobrenome, o código e a especialidade, tempoDeCasa]
     var listaAuxProfessoresTitular = mutableListOf<Any>()
 
-    var listaAlunos = mutableMapOf<Int, List<Any>>()
+    //listaAlunos = {key = codigoDoAluno, value = listaAuxAlunos[]}
+    var listaAlunos = mutableMapOf<Int, List<String>>()
+    //ListaAuxAlunos = [nome, sobrenome]
+    var listaAuxAlunos = mutableListOf<String>()
+
     var listaMatriculas = mutableMapOf<Int, List<Any>>()
 
 
@@ -134,5 +135,21 @@ class DigitalHouseManger() {
             println("Código Professor: ${codigoProfessor} não foi excluído! Por Favor verifique o código digitado!")
         }
     }
+
+    // Parte I - Item06. Criar um método na classe DigitalHouseManager que permita registrar um aluno. O método recebe
+    // como parâmetros o nome, o sobrenome e o código do aluno. O método deve criar um aluno com os dados
+    // correspondentes e adicioná-lo à lista de alunos.
+
+    var contadorAlunos = 0
+
+    fun registrarAluno(nome: String, sobrenome: String, codigoAluno: Int) {
+        // listaAuxAlunos = [nome, sobrenome]
+        listaAuxAlunos = mutableListOf(nome, sobrenome)
+        // listaAlunos = {key = codigoProfessor, value = listaAuxAlunos}
+        listaAlunos.put(codigoAluno, listaAuxAlunos) // armazena dados na listaAlunos
+        println(listaAlunos)
+        contadorAlunos++ // acresce 1 ao contadorAlunos
+    }
+
 }
 

@@ -151,4 +151,12 @@ fun main() {
     println("---------------------------------------------------------------------------------------------------------")
 
 
+    //PARTE I (item6): implementando a função registrarAluno()
+
+    managerDH.registrarAluno("Walter", "Retzer", 55000)
+    managerDH.registrarAluno("Dawid", "Retzer", 55001)
+
+    println("---------------------------------------------------------------------------------------------------------")
+
+
 }
