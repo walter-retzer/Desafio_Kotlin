@@ -10,12 +10,16 @@ class DigitalHouseManger() {
     // usado o Map para armazenar o nome do curso na posição chave e código e quantidade máxima de alunos na posição valores como lista
     // listaDeCursos = {key = nomeDoCurso, value: codigoDoCurso, quantidadeMaximaAlunos}
     var listaDeCurso = mutableMapOf<String, List<Int>>()
-
     // lista aux para armazenar código do curso e quantidade maxima de alunos como lista.
     var listaAuxCurso = mutableListOf<Int>() // listaAuxCurso = [codigoDoCurso, quantidadeMaximaAlunos]
 
-    var listaAlunos = mutableMapOf<Int, List<Any>>()
+    // listaDeProfessores = {key = nomeDoProfessor, value: listaAuxProfessor[nome do professor, o sobrenome, quantidade
+    // de horas disponíveis para monitoria, tempoDeCasa]}
     var listaDeProfessores = mutableMapOf<Int, List<Any>>()
+    //listaAuxProfessores = [nome do professor, o sobrenome, quantidade de horas disponíveis para monitoria, tempoDeCasa]
+    var listaAuxProfessores = mutableListOf<Any>()
+
+    var listaAlunos = mutableMapOf<Int, List<Any>>()
     var listaMatriculas = mutableMapOf<Int, List<Any>>()
 
 
@@ -62,11 +66,27 @@ class DigitalHouseManger() {
         if (auxChecaCodigoDigitado) {
             listaDeCurso.remove(aux)
             println("Curso ${codigoDigitado} foi excluído!")
-        // caso não haja o código digitado, irá enviar a mensagem para verificar o código digitado!
+            // caso não haja o código digitado, irá enviar a mensagem para verificar o código digitado!
         } else {
             println("Curso ${codigoDigitado} não foi excluído! Por Favor verifique o código digitado!")
         }
     }
+
+    // Parte I - Item03: Criar um método na classe DigitalHouseManager que permita registrar um professor adjunto.
+    // O método recebe como parâmetros o nome do professor, o sobrenome, o código e a quantidade de horas disponíveis para
+    // monitoria. O tempo de casa inicial do professor será zero. O método deve criar um professor adjunto com os
+    // dados correspondentes e adicioná-lo à lista de professores.
+
+    var contadorProfessores = 0
+
+    fun registrarProfessorAdjunto(nome: String, sobrenome: String, codigoProfessor: Int, quantidadeDeHoras: Int) {
+        var tempoDeCasa = 0
+        listaAuxProfessores = mutableListOf(nome, sobrenome, codigoProfessor, quantidadeDeHoras, tempoDeCasa)
+        listaDeProfessores.put(codigoProfessor, listaAuxProfessores)
+        println(listaDeProfessores)
+        contadorProfessores++
+    }
+
 
 }
 

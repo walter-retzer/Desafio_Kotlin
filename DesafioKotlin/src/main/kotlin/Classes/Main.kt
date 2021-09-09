@@ -110,7 +110,7 @@ fun main() {
 
     println("---------------------------------------------------------------------------------------------------------")
 
-//    //PARTE I (item2): implementando a função excluirCurso()
+    //PARTE I (item2): implementando a função excluirCurso()
 
     println(managerDH.listaDeCurso)
     managerDH.excluirCurso(90002)
@@ -118,6 +118,13 @@ fun main() {
     managerDH.excluirCurso(90001)
 
     println(managerDH.listaDeCurso)
+
+    println("---------------------------------------------------------------------------------------------------------")
+
+    //PARTE I (item3): implementando a função registarProfessorAdjunto()
+
+    managerDH.registrarProfessorAdjunto("Nicolas", "Tesla",88001,150)
+    managerDH.registrarProfessorAdjunto("Isaac", "Newton",88002,120)
 
     println("---------------------------------------------------------------------------------------------------------")
 
