@@ -105,7 +105,7 @@ fun main() {
 
     //PARTE H (item1): implementando a função registrarCurso()
     println("Lista de Cursos Registrados:")
-    managerDH.registrarCurso("FullStack", 90001, 2)
+    managerDH.registrarCurso("FullStack", 90001, 3)
     managerDH.registrarCurso("Android", 90002, 2)
 
     println("---------------------------------------------------------------------------------------------------------")
@@ -136,18 +136,19 @@ fun main() {
     println("---------------------------------------------------------------------------------------------------------")
 
     //PARTE I (item5): implementando a função excluirProfessor()
+
     println(managerDH.listaDeProfessores)
     managerDH.excluirProfessor(77001)
     println(managerDH.listaDeProfessores)
-////    managerDH.excluirProfessor(77002)
-////    println(managerDH.listaDeProfessores)
-////    managerDH.excluirProfessor(88001)
-////    println(managerDH.listaDeProfessores)
-////    managerDH.excluirProfessor(88002)
-////    println(managerDH.listaDeProfessores)
-////    managerDH.excluirProfessor(88003)
-////    println(managerDH.listaDeProfessores)
-//
+//    managerDH.excluirProfessor(77002)
+//    println(managerDH.listaDeProfessores)
+//    managerDH.excluirProfessor(88001)
+//    println(managerDH.listaDeProfessores)
+//    managerDH.excluirProfessor(88002)
+//    println(managerDH.listaDeProfessores)
+//    managerDH.excluirProfessor(88003)
+//    println(managerDH.listaDeProfessores)
+
     println("---------------------------------------------------------------------------------------------------------")
 
 
@@ -159,15 +160,36 @@ fun main() {
 
     println("---------------------------------------------------------------------------------------------------------")
 
-    //PARTE I (item7): implementando a função registrarAluno()
+    //PARTE I (item7): implementando a função matricularAluno()
 
+    // Matriculando 2 alunos no curso 90001 - FullStack:
     managerDH.matricularAluno(55000, 90001)
-   managerDH.matricularAluno(55002, 90001)
-    managerDH.matricularAluno(55001, 90001)
+    managerDH.matricularAluno(55002, 90001)
 
+    println("---------------------------------------------------------------------------------------------------------")
+
+    //testando as testando as possibilidades de inserir código de aluno que não existe ao curso 90001 - FullStack:
+    managerDH.matricularAluno(55555, 90001)
+    //testando as possibilidades de inserir código de curso que não existe:
+    managerDH.matricularAluno(55000, 99999)
+    //testando as possibilidades de inserir código de aluno e código de curso que não existem:
+    managerDH.matricularAluno(55555, 99999)
+
+    println("---------------------------------------------------------------------------------------------------------")
+
+    // matriculando 03 alunos no curso 90002 - Android:
     managerDH.matricularAluno(55000, 90002)
-//    managerDH.matricularAluno(55002, 90002)
-//    managerDH.matricularAluno(55001, 90009)
+    managerDH.matricularAluno(55002, 90002)
+    managerDH.matricularAluno(55001, 90002)
+
+    println("---------------------------------------------------------------------------------------------------------")
+
+    //testando as possibilidades de inserir código de aluno que não existe ao curso 90002 - Android:
+    managerDH.matricularAluno(55555, 90002)
+    //testando as possibilidades de inserir código de curso que não existe:
+    managerDH.matricularAluno(55000, 99999)
+    //testando as possibilidades de inserir código de aluno e código de curso que não existem:
+    managerDH.matricularAluno(55555, 99999)
 
     println("---------------------------------------------------------------------------------------------------------")
 

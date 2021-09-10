@@ -1,5 +1,7 @@
 package Classes
 
+import java.lang.Exception
+
 
 class DigitalHouseManger() {
 
@@ -182,7 +184,7 @@ class DigitalHouseManger() {
         }
         // caso o códigoAluno for encontrado, imprime na tela as informações do Aluno[nome, sobrenome]
         if (auxChecaCodigoAluno) {
-            print(listaAlunos[auxPosicaoChaveAluno])
+            println("Aluno: ${listaAlunos[auxPosicaoChaveAluno]}")
             // caso o codigoAluno não seja encontrado, imprime a mensagem, para verificar o código!
         } else {
             println("Código do Aluno não encontrado! Por favor verifique o código digitado!")
@@ -200,7 +202,7 @@ class DigitalHouseManger() {
         }
         // caso seja encontrado o códigoCurso, irá imprimir as informações do curso:
         if (auxChecaCodigoCurso) {
-            print(listaDeCurso[auxPosicaoChaveCurso])
+            println("Curso: ${listaDeCurso[auxPosicaoChaveCurso]}")
 
             // caso não seja encontrado o código do curso, irá imprimir as informações para verificar código digitado!
         } else {
@@ -213,36 +215,59 @@ class DigitalHouseManger() {
         // o curso desejado tem vagas disponíveis(quantidade máxima de Alunos), para posteriormente realizar a inclusão
         // da Matrícula.
 
-        // Para acessar a variável quantidade máxima Alunos iremos converter as informações do curso em lista:
-        var auxLista = listaDeCurso[auxPosicaoChaveCurso]!!.toList() // codigoCurso = [nomeCurso, qteMaxAlunos]
-        var auxQuantidadeMaximaAlunos = auxLista.get(1).toString() // convertendo qteMaxAlunos para String
-        var auxQteMaxAlunos = auxQuantidadeMaximaAlunos.toInt() // convertendo qteMaxAlunos para Int
+        // armazenando a informação da quantidade Máxima de Alunos em uma lista auxiliar!
+        var auxLista = listaDeCurso[auxPosicaoChaveCurso]
 
-        var nomeDoCurso = auxLista.get(0).toString() // armazenando o nome do curso
+        // Implementando os try para se houver alguma exceção, não venha parar o programa:
+        try {
+            // Para acessar a variável quantidade máxima Alunos iremos converter as informações do curso em lista:
+            // auxLista = [nomeCurso, quantidadeMaximaAlunos], convertendo auxLista para o tipo List
+            auxLista = auxLista?.toList()
+        } catch (exceptionGeneric: Exception) {
+
+        }
+        // Implementando o try para converter a variável quantidadeMaximaAlunos para o tipo Int, a qual esta contida na
+        // auxLista = [nomeCurso, quantidadeMaximaAlunos]
+        var auxQuantidadeMaximaAlunos: Int = 0 // var aux para a conversão de quantidadeMaximaAlunos no tipo Int:
+        try {
+            auxQuantidadeMaximaAlunos = auxLista?.get(1) as Int //convertendo var auxQuantidadeMaximaAlunos ao tipo Int
+        } catch (exceptionGeneric: Exception) {
+
+        }
+        // Implementando o try para armazenar a variável nomeDoCurso para o tipo Any, a qual esta contida na
+        // auxLista = [nomeCurso, quantidadeMaximaAlunos]
+        var auxNomeDoCurso: Any = ""  // var aux para a conversão do nome do curso para o tipo: Any
+        try {
+            auxNomeDoCurso = auxLista?.get(0) as Any // armazenando o nome do curso
+        } catch (exceptionGeneric: Exception) {
+
+        }
 
         // Verifica se há vagas disponíveis do curso requerido, se o códigoAluno e códigoCurso estão corretos para poder
         // realizar a matrícula do Aluno no Curso.
-        if (auxQteMaxAlunos > 0 && auxChecaCodigoAluno && auxChecaCodigoCurso) {
-            println(" Matrícula efetuada!")
-            println("")
+        if (auxQuantidadeMaximaAlunos > 0 && auxChecaCodigoAluno && auxChecaCodigoCurso) {
+            println("Vagas Disponíveis: ${auxQuantidadeMaximaAlunos}")
+            println("Matrícula efetuada!")
+
             // havendo vagas, iremos atualizar na ListaDeCurso a quantidadeMaximaAlunos
-            listaDeCurso.remove(auxPosicaoChaveCurso) // remove a informação antiga do respectivo curso
-            // atualiza a lista de curso com as informações de auxQteMaxAlunos - 1:
-            listaAuxCurso = mutableListOf(nomeDoCurso, (auxQteMaxAlunos - 1))
+            listaDeCurso.remove(auxPosicaoChaveCurso) // remove da listaDeCurso a informação antiga do respectivo curso
+            // atualiza a lista de curso com as informações de quantidadeMaximaAlunos = (auxQuantidadeMaximaAlunos -1)
+            listaAuxCurso = mutableListOf(auxNomeDoCurso, (auxQuantidadeMaximaAlunos - 1)) // atualiza listaAuxCurso
             listaDeCurso.put(codigoCurso, listaAuxCurso) // armazena as novas informações na Lista de Cursos
+
+            println("${listaDeCurso}\n")
+
 
 //            listaDeCurso.replace(codigoCurso, auxLista)
 //            listaMatriculas.put(listaAlunos[auxPosicaoChaveAluno]!!, listaDeCurso[auxPosicaoChaveCurso]!!)
 //            println(listaMatriculas)
 
-        // caso não haja vagas, imprime a mensagem na tela!
-        } else if (auxQteMaxAlunos >= 0){
-            println(" Não há vagas disponíveis para o curso solicitado!")
-            println("")
-        // caso o código do curso e código aluno estajam incorretos, imprime a mensagem:
+            // caso não haja vagas para o curso solicitado, imprime a mensagem na tela!
+        } else if (auxQuantidadeMaximaAlunos <= 0 && auxChecaCodigoCurso) {
+            println("Não há vagas disponíveis para o curso solicitado!\n")
+            // caso o código do curso e código aluno estajam incorretos, imprime a mensagem:
         } else {
-            println("Matrícula não pode ser efetuada, por favor verifique os dados!")
-            println("")
+            println("Matrícula não pode ser efetuada, por favor verifique os dados!\n")
         }
     }
 }
