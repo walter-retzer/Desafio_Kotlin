@@ -17,7 +17,7 @@ class Matricula(var aluno: Alunos, var curso: Curso) {
 
     //Sobreescrevendo a função toString() para exibir informações da Matrícula efetuada no dia atual:
     override fun toString(): String {
-        return "O Aluno: ${aluno.nome} ${aluno.sobrenome} foi matrículado no curso ${curso.nomeDoCurso} na ${dataMatricula}"
+        return "O(a) Aluno(a): ${aluno.nome} ${aluno.sobrenome} foi matriculado(a) no curso ${curso.nomeDoCurso} na ${dataMatricula}"
     }
 
 }
