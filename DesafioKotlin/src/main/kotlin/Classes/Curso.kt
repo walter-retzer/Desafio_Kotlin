@@ -7,6 +7,7 @@ package Classes
 open class Curso(
     var nomeDoCurso: String,
     var codigoCurso: Int,
+    var quantidadeMaximaAlunos: Int
 ) {
 
 //        //Para o construtor secundário, deve passar os parâmetros(nome e sobrenome)
@@ -15,25 +16,15 @@ open class Curso(
 //        this.sobrenome = sobrenome // a palavra this é utilizada para referenciar a variável sobrenome ao construtor
 //    }
 
-    var quantidadeMaximaAlunos: Int = 0
-
     constructor(
         nomeDoCurso: String,
         codigoCurso: Int,
+        quantidadeMaximaAlunos: Int,
         professorTitular: ProfessorTitular,
         professorAdjunto: ProfessorAdjunto,
-        quantidadeMaximaAlunos: Int,
         listaAlunosMatriculados: MutableList<Alunos>
 
-
-        ) : this(nomeDoCurso, codigoCurso) {
-        this.nomeDoCurso = nomeDoCurso
-        this.quantidadeMaximaAlunos = quantidadeMaximaAlunos
-    }
-
-    init {
-        quantidadeMaximaAlunos = 10
-    }
+    ) : this(nomeDoCurso, codigoCurso, quantidadeMaximaAlunos)
 
     var listaAlunos = ArrayList<Alunos>()
     var alunosAdicionados: Int = 0

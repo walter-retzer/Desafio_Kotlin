@@ -60,8 +60,8 @@ fun main() {
 
     //PARTE E: criando as variáveis do curso:
 
-    var curso = Curso("FullStack", 90001)
-    var curso1 = Curso("Android", 90002)
+    var curso = Curso("FullStack", 90001, 3)
+    var curso1 = Curso("Android", 90002, 2)
     var listaCursos = mutableListOf(curso, curso1)
 
     println(curso.adicionarUmAluno(aluno))
@@ -198,5 +198,21 @@ fun main() {
     println("Lista de Matrícula Digital House: ${managerDH.listaMatriculas}")
 
     println("---------------------------------------------------------------------------------------------------------")
+
+    //PARTE I (item8): implementando o método: alocarProfessores()
+    managerDH.alocarProfessores(90001, 77001, 88001)
+    println()
+
+    // testando o método alocarProfessor() com código de Curso inexistente:
+    managerDH.alocarProfessores(99999, 77002, 88002)
+    println()
+
+    // testando o método alocarProfessor() com código de Professor Titular e Professor Adjunto inexistentes:
+    managerDH.alocarProfessores(90002, 77777, 88888)
+
+    println("---------------------------------------------------------------------------------------------------------")
+
+
+
 
 }

@@ -268,8 +268,8 @@ class DigitalHouseManger() {
             // Adicionando os dados do Curso escolhido e os dados do aluno para a Lista de Matrícula:
             try {
                 // listaMatriculas = {[nome do Curso, quantidadeVagas] = [nome, sobrenome]}
-                listaMatriculas.put(listaDeCurso[auxPosicaoChaveCurso]!! , listaAlunos[auxPosicaoChaveAluno]!!)
-            }catch (exceptionGeneric: Exception){
+                listaMatriculas.put(listaDeCurso[auxPosicaoChaveCurso]!!, listaAlunos[auxPosicaoChaveAluno]!!)
+            } catch (exceptionGeneric: Exception) {
 
             }
 
@@ -280,5 +280,87 @@ class DigitalHouseManger() {
             println("Matrícula não pode ser efetuada, por favor verifique os dados!\n")
         }
     }
+
+    //8. Criar um método na classe DigitalHouseManager que permita alocar professores a um curso. O método recebe como
+    // parâmetros o código do curso, o código do professor titular e o código do professor adjunto. O método deve:
+    // Encontrar o professor titular na lista de professores.
+    // Encontrar o professor adjunto na lista de professores.
+    // Alocar ambos professores ao curso.
+
+    fun alocarProfessores(codigoCurso: Int, codigoProfessorTitular: Int, codigoProfessorAdjunto: Int) {
+        //variavel aux para verificar se há a lista de curso contém o código digitado
+        var auxChecaCodigoDigitado = false
+        // variavel auxiliar que armazena a posição da chave, caso haja o código digitado
+        var auxArmazenaPosicaoChave = 0
+
+        // utilização de loop for para passar pelos itens da lista de cursos:
+        for (codigo in listaDeCurso) {
+            if (codigo.key == codigoCurso) { //checa se em alguma posição da chave (key) contém o código digitado!
+                auxChecaCodigoDigitado = true  // caso haja o código a variável auxChecaCodigoDigitado = true
+                // armazena a posição da chave onde foi encontrado o código digitado.
+                auxArmazenaPosicaoChave = codigo.key
+                break // interrompe o laço for, pois, o código digitado já foi encontrado
+            }
+        }
+        // caso haja o código digitado, irá excluir da listaCurso a posição armazenada pela var auxArmazenaPosicaoChave
+        if (auxChecaCodigoDigitado) {
+            println("Código do Curso: ${codigoCurso}  ${listaDeCurso[auxArmazenaPosicaoChave]}")
+            listaDeCurso.remove(auxArmazenaPosicaoChave)
+        } else { // caso não haja o código digitado, irá enviar a mensagem para verificar o código digitado!
+            println("Curso ${codigoCurso} não encontrado! Por Favor verifique o código digitado!")
+        }
+
+
+
+        //Encontrar o Professor Titular na Lista de Professores:
+
+        //variável aux para verificar se há a lista de Professores contém o código do Professor Titular
+        var auxChecaCodigoProfTitular = false
+        // variável auxiliar que armazena a posição da chave, caso haja o código do Professor Titular
+        var auxPosicaoChaveProfTitular = 0
+
+        for (codigo in listaDeProfessores) {
+            if (codigo.key == codigoProfessorTitular) { // checa se o valor da posição .key é igual ao codigoProfessorTitular
+                // caso haja o códigoProfessorTitular a variável auxChecaCodigoProfTitular = true
+                auxChecaCodigoProfTitular = true
+                auxPosicaoChaveProfTitular = codigo.key // armazena o valor da posição key
+                break // interrompe o laço for, pois, o códigoProfTitular já foi encontrado.
+            }
+        }
+
+        // caso seja encontrado o códigoProfTitular, irá imprimir as informações do Professor Titular:
+        if (auxChecaCodigoProfTitular) {
+            println("Código Professor Titular: ${listaDeProfessores[auxPosicaoChaveProfTitular]}")
+
+            // caso não seja encontrado o código do Professor Titular, irá imprimir as informações para verificar código digitado!
+        } else {
+            println("Código do Professor Titular não encontrado! Por favor verifique o código digitado!")
+        }
+
+        //Encontrar o Professor Adjunto na Lista de Professores
+        //variável aux para verificar se há a lista de Professores contém o código do Professor Adjunto
+        var auxChecaCodigoProfAdjunto = false
+        // variável auxiliar que armazena a posição da chave, caso haja o código do Professor Adjunto
+        var auxPosicaoChaveProfAdjunto = 0
+
+        for (codigo in listaDeProfessores) {
+            if (codigo.key == codigoProfessorAdjunto) { // checa se o valor da posição .key é igual ao codigoProfessorAdjunto
+                // caso haja o códigoProfessorAdjunto a variável auxChecaCodigoProfAdjunto = true
+                auxChecaCodigoProfAdjunto = true
+                auxPosicaoChaveProfAdjunto = codigo.key // armazena o valor da posição key
+                break // interrompe o laço for, pois, o códigoProfAdjunto já foi encontrado.
+            }
+        }
+        // caso seja encontrado o códigoProfTitular, irá imprimir as informações do Professor Adjunto:
+        if (auxChecaCodigoProfAdjunto) {
+            println("Código Professor Titular: ${listaDeProfessores[auxPosicaoChaveProfAdjunto]}")
+
+            // caso não seja encontrado o código do Professor Adjunto, irá imprimir as informações para verificar código digitado!
+        } else {
+            println("Código do Professor Adjunto não encontrado! Por favor verifique o código digitado!")
+        }
+
+    }
+
 }
 
