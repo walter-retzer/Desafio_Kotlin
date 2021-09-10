@@ -8,24 +8,28 @@ class DigitalHouseManger() {
 // uma lista de cursos e uma lista de matrículas
 
     // usado o Map para armazenar o nome do curso na posição chave e código e quantidade máxima de alunos na posição valores como lista
-    // listaDeCursos = {key = nomeDoCurso, value: codigoDoCurso, quantidadeMaximaAlunos}
-    var listaDeCurso = mutableMapOf<String, List<Int>>()
+    // listaDeCursos = {key = codigoDoCurso, value: nomeDoCurso, quantidadeMaximaAlunos}
+    var listaDeCurso = mutableMapOf<Int, List<Any>>()
+
     // lista aux para armazenar código do curso e quantidade maxima de alunos como lista.
-    var listaAuxCurso = mutableListOf<Int>() // listaAuxCurso = [codigoDoCurso, quantidadeMaximaAlunos]
+    var listaAuxCurso = mutableListOf<Any>() // listaAuxCurso = [nomeDoCurso, quantidadeMaximaAlunos]
 
     // listaDeProfessores = {key = nomeDoProfessor, value: listaAuxProfessor[]}
     var listaDeProfessores = mutableMapOf<Int, List<Any>>()
+
     //listaAuxProfessoresAdjuntos = [nome do professor, o sobrenome, quantidade de horas disponíveis para monitoria, tempoDeCasa]
     var listaAuxProfessoresAdjuntos = mutableListOf<Any>()
+
     //listaAuxProfessores = [nome do professor, o sobrenome, o código e a especialidade, tempoDeCasa]
     var listaAuxProfessoresTitular = mutableListOf<Any>()
 
     //listaAlunos = {key = codigoDoAluno, value = listaAuxAlunos[]}
     var listaAlunos = mutableMapOf<Int, List<String>>()
+
     //ListaAuxAlunos = [nome, sobrenome]
     var listaAuxAlunos = mutableListOf<String>()
 
-    var listaMatriculas = mutableMapOf<Int, List<Any>>()
+    var listaMatriculas = mutableMapOf<List<String>, List<Int>>()
 
 
     // Parte I - Item01: Criar um método na classe DigitalHouseManager que permita registrar um
@@ -40,9 +44,9 @@ class DigitalHouseManger() {
 
         // a listaAuxCurso recebe os parametros "Int": código do curso e quantidade Máxima de Alunos
         // listaAuxCurso[codigoDoCurso, quantidadeMaximaAlunos]
-        listaAuxCurso = mutableListOf(codigoDoCurso, quantidadeMaximaAlunos)
+        listaAuxCurso = mutableListOf(nomeDoCurso, quantidadeMaximaAlunos)
         // insere os dados na lista de curso:
-        listaDeCurso.put(nomeDoCurso, listaAuxCurso) // {key = nomeDoCurso, value: listaAuxCurso}
+        listaDeCurso.put(codigoDoCurso, listaAuxCurso) // {key = nomeDoCurso, value: listaAuxCurso}
         println(listaDeCurso)
         contadorCursos++ //acresce 1 ao contadorCurso
 
@@ -53,26 +57,25 @@ class DigitalHouseManger() {
     // na lista de cursos e excluí-lo da lista.
 
     fun excluirCurso(codigoDigitado: Int) {
-        var auxChecaCodigoDigitado = false //variavel aux para verificar se há a lista de curso contém o código digitado
-        var aux = " " // variavel auxiliar que armazena a posição da chave, caso haja o código digitado
+        //variavel aux para verificar se há a lista de curso contém o código digitado
+        var auxChecaCodigoDigitado = false
+        // variavel auxiliar que armazena a posição da chave, caso haja o código digitado
+        var auxArmazenaPosicaoChave = 0
 
-        // utilização de 2 loops for para passar pelos parâmetros de chave e valor de cada item da lista de cursos:
-        for (chave in listaDeCurso) {
-            for (valor in chave.value) {
-                if (chave.value.contains(codigoDigitado)) { //checa se na posição valor contém o código digitado!
-                    auxChecaCodigoDigitado = true  // caso haja o código a variável auxChecaCodigoDigitado = true
-                    aux = chave.key // armazena-se o valor da chave, para posteriormente excluir essa posição da lista
-                    break // interrompe o laço for, pois, o código digitado já foi encontrado
-                }
+        // utilização de loop for para passar pelos itens da lista de cursos:
+        for (codigo in listaDeCurso) {
+            if (codigo.key == codigoDigitado) { //checa se em alguma posição da chave (key) contém o código digitado!
+                auxChecaCodigoDigitado = true  // caso haja o código a variável auxChecaCodigoDigitado = true
+                // armazena a posição da chave onde foi encontrado o código digitado.
+                auxArmazenaPosicaoChave = codigo.key
+                break // interrompe o laço for, pois, o código digitado já foi encontrado
             }
         }
-
-        // caso haja o código digitado, irá excluir da lista de curso a posição armazenada pela variável aux
+        // caso haja o código digitado, irá excluir da listaCurso a posição armazenada pela var auxArmazenaPosicaoChave
         if (auxChecaCodigoDigitado) {
-            listaDeCurso.remove(aux)
-            println("Curso ${codigoDigitado} foi excluído!")
-            // caso não haja o código digitado, irá enviar a mensagem para verificar o código digitado!
-        } else {
+            println("Curso ${codigoDigitado} : ${listaDeCurso.get(codigoDigitado)} foi excluído!")
+            listaDeCurso.remove(auxArmazenaPosicaoChave)
+        } else { // caso não haja o código digitado, irá enviar a mensagem para verificar o código digitado!
             println("Curso ${codigoDigitado} não foi excluído! Por Favor verifique o código digitado!")
         }
     }
@@ -109,27 +112,36 @@ class DigitalHouseManger() {
         contadorProfessores++ //acresce 1 ao contadorProfessores
     }
 
-    // Parte I - Item05. Criar um método na classe DigitalHouseManager que permita excluir um professor.
-    // O método recebe como parâmetro o código do professor. O método deve utilizar o código do professor para
-    // encontrá-lo na lista de professores e eliminá-lo da lista.
+//    // Parte I - Item05. Criar um método na classe DigitalHouseManager que permita excluir um professor.
+//    // O método recebe como parâmetro o código do professor. O método deve utilizar o código do professor para
+//    // encontrá-lo na lista de professores e eliminá-lo da lista.
 
 
     fun excluirProfessor(codigoProfessor: Int) {
-        var auxChecaCodigoProfessor = false //variavel aux para verificar se há a lista de curso contém o código digitado
-        var aux = 0 // variavel auxiliar que armazena a posição da chave, caso haja o códigoProfessor
+        //variavel aux para verificar se há a lista de curso contém o código digitado
+        var auxChecaCodigoProfessor = false
+        // variavel auxiliar que armazena a posição da chave, caso haja o códigoProfessor
+        var auxArmazenaPosicaoChave = 0
 
         // utilização de loop for para passar pelos parâmetros de cada chave da lista de Professores:
         for (chave in listaDeProfessores) {
             if (chave.key == codigoProfessor) { // verifica se a posição chave.key == codigoProfessor.
                 auxChecaCodigoProfessor = true  // caso haja o códigoProfessor a variável auxChecaCodigoProfessor = true
-                aux = chave.key // armazena-se o valor da chave, para posteriormente excluir essa posição da lista de Professores
+                // armazena-se o valor da chave, para posteriormente excluir essa posição da lista de Professores
+                auxArmazenaPosicaoChave = chave.key
                 break // interrompe o laço for, pois, o códigoProfessor já foi encontrado.
             }
         }
-        //se caso houver o códigoProfessor, os dados referente ao codigoProfessor serão excluídos da Lista de Professores.
+        //se caso houver o códigoProfessor, os dados referente ao codigoProfessor serão excluídos da ListaDeProfessores.
         if (auxChecaCodigoProfessor) {
-            println("Código Professor: ${codigoProfessor} foi excluído!")
-            listaDeProfessores.remove(aux)
+            println(
+                "Código Professor: ${codigoProfessor}, dados do Professor: ${
+                    listaDeProfessores.get(
+                        auxArmazenaPosicaoChave
+                    )
+                } foram excluídos!"
+            )
+            listaDeProfessores.remove(auxArmazenaPosicaoChave)
             //se caso não houver o códigoProfessor, retorna uma mensagem para verificar código digitado.
         } else {
             println("Código Professor: ${codigoProfessor} não foi excluído! Por Favor verifique o código digitado!")
@@ -151,5 +163,87 @@ class DigitalHouseManger() {
         contadorAlunos++ // acresce 1 ao contadorAlunos
     }
 
+
+    // Parte I - Item07. Criar um método na classe DigitalHouseManager que permita matricular um aluno em um curso.
+    // O método recebe como parâmetros o código do aluno e o código do curso em que ele está se matriculando.
+
+    fun matricularAluno(codigoAluno: Int, codigoCurso: Int) {
+        // Encontrar o aluno que queremos matricular:
+        var auxChecaCodigoAluno = false //variavel aux para verificar se há a lista de Alunos contém o código digitado
+        var auxPosicaoChaveAluno = 0 // / variavel auxiliar que armazena a posição da chave, caso haja o códigoAluno
+
+        for (codigo in listaAlunos) {
+            if (codigo.key == codigoAluno) {
+                auxChecaCodigoAluno = true // caso haja o códigoAluno a variável auxChecaCodigoAluno = true
+                // armazena-se o valor da chave, para posteriormente utilizar os valores
+                auxPosicaoChaveAluno = codigo.key
+                break // interrompe o laço for, pois, o códigoAluno já foi encontrado.
+            }
+        }
+        // caso o códigoAluno for encontrado, imprime na tela as informações do Aluno[nome, sobrenome]
+        if (auxChecaCodigoAluno) {
+            print(listaAlunos[auxPosicaoChaveAluno])
+            // caso o codigoAluno não seja encontrado, imprime a mensagem, para verificar o código!
+        } else {
+            println("Código do Aluno não encontrado! Por favor verifique o código digitado!")
+        }
+
+        //Encontrar o curso em que o aluno está se matriculando:
+        var auxChecaCodigoCurso = false //variável aux para verificar se há a lista de curso contém o código digitado
+        var auxPosicaoChaveCurso = 0 // variável auxiliar que armazena a posição da chave, caso haja o código digitado
+        for (codigo in listaDeCurso) {
+            if (codigo.key == codigoCurso) { // checa se o valor da posição .key é igual ao codigoCurso
+                auxChecaCodigoCurso = true // caso haja o códigoCurso a variável auxChecaCodigoCurso = true
+                auxPosicaoChaveCurso = codigo.key // armazena o valor da posição key
+                break // interrompe o laço for, pois, o códigoAluno já foi encontrado.
+            }
+        }
+        // caso seja encontrado o códigoCurso, irá imprimir as informações do curso:
+        if (auxChecaCodigoCurso) {
+            print(listaDeCurso[auxPosicaoChaveCurso])
+
+            // caso não seja encontrado o código do curso, irá imprimir as informações para verificar código digitado!
+        } else {
+            println("Código do Curso não encontrado! Por favor verifique o código digitado!")
+        }
+
+        // Matricular o aluno, se for possível.
+
+        // Para matricular o aluno, devemos verificar se o código do Aluno, e Código Curso estão corretos e verificar se
+        // o curso desejado tem vagas disponíveis(quantidade máxima de Alunos), para posteriormente realizar a inclusão
+        // da Matrícula.
+
+        // Para acessar a variável quantidade máxima Alunos iremos converter as informações do curso em lista:
+        var auxLista = listaDeCurso[auxPosicaoChaveCurso]!!.toList() // codigoCurso = [nomeCurso, qteMaxAlunos]
+        var auxQuantidadeMaximaAlunos = auxLista.get(1).toString() // convertendo qteMaxAlunos para String
+        var auxQteMaxAlunos = auxQuantidadeMaximaAlunos.toInt() // convertendo qteMaxAlunos para Int
+
+        var nomeDoCurso = auxLista.get(0).toString() // armazenando o nome do curso
+
+        // Verifica se há vagas disponíveis do curso requerido, se o códigoAluno e códigoCurso estão corretos para poder
+        // realizar a matrícula do Aluno no Curso.
+        if (auxQteMaxAlunos > 0 && auxChecaCodigoAluno && auxChecaCodigoCurso) {
+            println(" Matrícula efetuada!")
+            println("")
+            // havendo vagas, iremos atualizar na ListaDeCurso a quantidadeMaximaAlunos
+            listaDeCurso.remove(auxPosicaoChaveCurso) // remove a informação antiga do respectivo curso
+            // atualiza a lista de curso com as informações de auxQteMaxAlunos - 1:
+            listaAuxCurso = mutableListOf(nomeDoCurso, (auxQteMaxAlunos - 1))
+            listaDeCurso.put(codigoCurso, listaAuxCurso) // armazena as novas informações na Lista de Cursos
+
+//            listaDeCurso.replace(codigoCurso, auxLista)
+//            listaMatriculas.put(listaAlunos[auxPosicaoChaveAluno]!!, listaDeCurso[auxPosicaoChaveCurso]!!)
+//            println(listaMatriculas)
+
+        // caso não haja vagas, imprime a mensagem na tela!
+        } else if (auxQteMaxAlunos >= 0){
+            println(" Não há vagas disponíveis para o curso solicitado!")
+            println("")
+        // caso o código do curso e código aluno estajam incorretos, imprime a mensagem:
+        } else {
+            println("Matrícula não pode ser efetuada, por favor verifique os dados!")
+            println("")
+        }
+    }
 }
 
