@@ -190,7 +190,7 @@ class DigitalHouseManger() {
         // caso o códigoAluno for encontrado, imprime na tela as informações do Aluno[nome, sobrenome]
         if (auxChecaCodigoAluno) {
             println("Aluno: ${listaAlunos[auxPosicaoChaveAluno]}")
-            auxListaMatricula.clear()
+            //auxListaMatricula.clear()
             auxListaMatricula.add(listaAlunos[auxPosicaoChaveAluno]!!)
             // caso o codigoAluno não seja encontrado, imprime a mensagem, para verificar o código!
         } else {
@@ -305,11 +305,9 @@ class DigitalHouseManger() {
         // caso haja o código digitado, irá excluir da listaCurso a posição armazenada pela var auxArmazenaPosicaoChave
         if (auxChecaCodigoDigitado) {
             println("Código do Curso: ${codigoCurso}  ${listaDeCurso[auxArmazenaPosicaoChave]}")
-            listaDeCurso.remove(auxArmazenaPosicaoChave)
         } else { // caso não haja o código digitado, irá enviar a mensagem para verificar o código digitado!
             println("Curso ${codigoCurso} não encontrado! Por Favor verifique o código digitado!")
         }
-
 
 
         //Encontrar o Professor Titular na Lista de Professores:
@@ -358,6 +356,27 @@ class DigitalHouseManger() {
             // caso não seja encontrado o código do Professor Adjunto, irá imprimir as informações para verificar código digitado!
         } else {
             println("Código do Professor Adjunto não encontrado! Por favor verifique o código digitado!")
+        }
+
+        // se todos os parâmetros abaixos foram válidos, irá executar a função alocar
+        if (auxChecaCodigoDigitado && auxChecaCodigoProfTitular && auxChecaCodigoProfAdjunto) {
+            //var listaAlocaProf = mutableListOf<Any>()
+            var listaAlocaProf = listaDeCurso[auxArmazenaPosicaoChave].toString()
+            var auxProfTitular = listaDeProfessores[auxPosicaoChaveProfTitular].toString()
+            var auxProfAdjunto = listaDeProfessores[auxPosicaoChaveProfAdjunto].toString()
+
+
+            // havendo vagas, iremos atualizar na ListaDeCurso a quantidadeMaximaAlunos
+            listaDeCurso.remove(auxArmazenaPosicaoChave) // remove da listaDeCurso a informação antiga do respectivo curso
+
+            // listaAuxCurso = mutableListOf(
+            listaAuxCurso = mutableListOf(listaAlocaProf, auxProfTitular, auxProfAdjunto) // atualiza listaAuxCurso
+            listaDeCurso.put(codigoCurso, listaAuxCurso) // armazena as novas informações na Lista de Cursos
+
+            println("Professores alocados na lista de Curso: ${listaDeCurso}")
+
+        } else{
+            println("Professores não foram alocados na lista de Curso! Por favor verifique os dados cadastrados!")
         }
 
     }
