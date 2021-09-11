@@ -10,11 +10,8 @@ open class Curso(
     var quantidadeMaximaAlunos: Int
 ) {
 
-//        //Para o construtor secundário, deve passar os parâmetros(nome e sobrenome)
-//    //deve utilizar a palavra this para referenciar o construtor primário!
-//    constructor(nome: String, sobrenome: String) : this(nome) {
-//        this.sobrenome = sobrenome // a palavra this é utilizada para referenciar a variável sobrenome ao construtor
-//    }
+    // Para o construtor secundário, deve passar os parâmetros(nomeDoCurso, codigoCurso e quantidadeMaximaAlunos) deve
+    // utilizar a palavra this para referenciar o construtor primário!
 
     constructor(
         nomeDoCurso: String,
@@ -49,10 +46,9 @@ open class Curso(
 
     // 1. Criar um método na classe Curso que permita adicionar um aluno à lista.
     // O método retornará true se o aluno puder ser adicionado ou false caso não haja vagas disponíveis.
-
     fun adicionarUmAluno(umAluno: Alunos): Boolean {
         if (alunosAdicionados < quantidadeMaximaAlunos) {
-            listaAlunos.add(umAluno)
+            listaAlunos.add(umAluno) // adiciona um aluno a listaDeAlunos
             alunosAdicionados++
             return true
         } else {
@@ -70,7 +66,6 @@ open class Curso(
             listaAlunos.remove(umAluno)
             println("Os dados do(a) aluno(a) ${umAluno.nome} foram excluídos!")
         }
-
     }
 
 

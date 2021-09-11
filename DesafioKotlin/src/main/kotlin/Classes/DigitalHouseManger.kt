@@ -9,52 +9,51 @@ class DigitalHouseManger() {
 // A princípio, DigitalHouseManager tem uma lista de alunos, uma lista de professores,
 // uma lista de cursos e uma lista de matrículas
 
-    // usado o Map para armazenar o nome do curso na posição chave e código e quantidade máxima de alunos na posição valores como lista
+    // usado o Map para armazenar o codigoDoCurso na posição chave e na posição chave: nomeDoCurso, quantidadeMáximaAlunos
     // listaDeCursos = {key = codigoDoCurso, value: nomeDoCurso, quantidadeMaximaAlunos}
     var listaDeCurso = mutableMapOf<Int, List<Any>>()
 
-    // lista aux para armazenar código do curso e quantidade maxima de alunos como lista.
+    // lista aux para armazenar nomeDoCurso e quantidadeMaximaAlunos como lista.
     var listaAuxCurso = mutableListOf<Any>() // listaAuxCurso = [nomeDoCurso, quantidadeMaximaAlunos]
 
-    // listaDeProfessores = {key = nomeDoProfessor, value: listaAuxProfessor[]}
+    // a listaDeProfessores receberá dados do códigoProfessor e uma Lista de dados de Professores Titular ou Adjuntos:
+    // listaDeProfessores = {key = codigoProfessor, value: listaAuxProfessorAdjunto[]}
+    // listaDeProfessores = {key = codigoProfessor, value: listaAuxProfessorTitular[]}
     var listaDeProfessores = mutableMapOf<Int, List<Any>>()
 
-    //listaAuxProfessoresAdjuntos = [nome do professor, o sobrenome, quantidade de horas disponíveis para monitoria, tempoDeCasa]
+    // Lista Auxiliares que serão utilizadas nas conversões e acesso aos dados da listaDeProfessores:
+    // listaAuxProfessoresAdjuntos = [nome do professor, o sobrenome, quantidade de horas disponíveis para monitoria, tempoDeCasa]
     var listaAuxProfessoresAdjuntos = mutableListOf<Any>()
 
-    //listaAuxProfessores = [nome do professor, o sobrenome, o código e a especialidade, tempoDeCasa]
+    // listaAuxProfessores = [nome do professor, o sobrenome, o código e a especialidade, tempoDeCasa]
     var listaAuxProfessoresTitular = mutableListOf<Any>()
 
-    //listaAlunos = {key = codigoDoAluno, value = listaAuxAlunos[]}
+    // a listaDeAlunos receberá dados do códigoAluno e uma Lista de dados contendo nome e sobrenome do Aluno:
+    // listaAlunos = {key = codigoDoAluno, value = listaAuxAlunos[]}
     var listaAlunos = mutableMapOf<Int, List<String>>()
 
-    //ListaAuxAlunos = [nome, sobrenome]
+    // listaAuxAlunos = [nome, sobrenome]
     var listaAuxAlunos = mutableListOf<String>()
 
+
+    // A listaMatriculas será um Map que a chave receberá uma listaDeCurso e na posição valor receberá uma listaAluno,
+    // de acordo com o código do curso e código do aluno.
+    // listaMatriculas = {key = listaDeCursos[], value = listaAuxAlunos[]}
     var listaMatriculas = mutableMapOf<List<Any>, List<Any>>()
-    var auxListaMatricula = mutableListOf<Any>()
-    var auxListaMatricula1 = mutableListOf<Any>()
-    //listaMatriculas.put(contadorMatricula, auxListaMatricula)
 
 
-    // Parte I - Item01: Criar um método na classe DigitalHouseManager que permita registrar um
-    // curso. O método recebe como parâmetros o nome do curso, o código e a
-    // quantidade máxima de alunos admitidos. O método deve criar um curso com
-    // os dados correspondentes e adicioná-lo à lista de cursos.
-
-    var contadorCursos: Int = 0  // variável para contar quantos cursos foram registrados.
+    // Parte I - Item01: Criar um método na classe DigitalHouseManager que permita registrar um curso.
+    // O método recebe como parâmetros o nome do curso, o código e a quantidade máxima de alunos admitidos.
+    // O método deve criar um curso com os dados correspondentes e adicioná-lo à lista de cursos.
 
     // função registrarCurso:
     fun registrarCurso(nomeDoCurso: String, codigoDoCurso: Int, quantidadeMaximaAlunos: Int) {
-
-        // a listaAuxCurso recebe os parametros "Int": código do curso e quantidade Máxima de Alunos
+        // listaAuxCurso recebe os parametros nomeDoCurso: String e quantidadeMáximaAlunos: Int
         // listaAuxCurso[codigoDoCurso, quantidadeMaximaAlunos]
         listaAuxCurso = mutableListOf(nomeDoCurso, quantidadeMaximaAlunos)
         // insere os dados na lista de curso:
-        listaDeCurso.put(codigoDoCurso, listaAuxCurso) // {key = nomeDoCurso, value: listaAuxCurso}
-        println(listaDeCurso)
-        contadorCursos++ //acresce 1 ao contadorCurso
-
+        listaDeCurso.put(codigoDoCurso, listaAuxCurso) // listaDeCurso = {key = codigoDoCurso, value: listaAuxCurso}
+        println("Lista de Curso: ${listaDeCurso}")
     }
 
     // Parte I - Item02: Criar um método na classe DigitalHouseManager que permita excluir um curso.
@@ -62,7 +61,7 @@ class DigitalHouseManger() {
     // na lista de cursos e excluí-lo da lista.
 
     fun excluirCurso(codigoDigitado: Int) {
-        //variavel aux para verificar se há a lista de curso contém o código digitado
+        //variavel aux para verificar se há na lista de curso contém o código digitado
         var auxChecaCodigoDigitado = false
         // variavel auxiliar que armazena a posição da chave, caso haja o código digitado
         var auxArmazenaPosicaoChave = 0
@@ -90,20 +89,20 @@ class DigitalHouseManger() {
     // monitoria. O tempo de casa inicial do professor será zero. O método deve criar um professor adjunto com os
     // dados correspondentes e adicioná-lo à lista de professores.
 
-    var contadorProfessores = 0
 
     fun registrarProfessorAdjunto(nome: String, sobrenome: String, codigoProfessor: Int, quantidadeDeHoras: Int) {
-        var tempoDeCasa = 0 // tempo inicial será zero
+        var tempoDeCasa = 0 // tempo inicial de casa será zero
+
         // listaAuxProfessoresAdjuntos = [nome, sobrenome, quantidadeDeHoras, tempoDeCasa]
         listaAuxProfessoresAdjuntos = mutableListOf(nome, sobrenome, quantidadeDeHoras, tempoDeCasa)
         // listaDeProfessores = {key = codigoProfessor, value = listaAuxProfessorAdjunto}
         listaDeProfessores.put(codigoProfessor, listaAuxProfessoresAdjuntos) // armazena dados na listaDeProfessores
-        println(listaDeProfessores)
-        contadorProfessores++ //acresce 1 ao contadorProfessores
+        println("Lista de Professores: ${listaDeProfessores}")
     }
 
-    // Parte I - Item04. Criar um método na classe DigitalHouseManager que permita registrar um
-    // professor titular. O método recebe como parâmetros o nome do professor, o sobrenome, o código e a especialidade.
+
+    // Parte I - Item04. Criar um método na classe DigitalHouseManager que permita registrar um professor titular.
+    // O método recebe como parâmetros o nome do professor, o sobrenome, o código e a especialidade.
     // O tempo de casa inicial do professor será zero. O método deve criar um professor titular com os dados
     // correspondentes e adicioná-lo à lista de professores.
 
@@ -113,13 +112,12 @@ class DigitalHouseManger() {
         listaAuxProfessoresTitular = mutableListOf(nome, sobrenome, especialidade, tempoDeCasa)
         //listaDeProfessores = {key = codigoProfessor, value = listaAuxProfessoresTitular}
         listaDeProfessores.put(codigoProfessor, listaAuxProfessoresTitular) // armazena dados na listaDeProfessores
-        println(listaDeProfessores)
-        contadorProfessores++ //acresce 1 ao contadorProfessores
+        println("Lista de Professores: ${listaDeProfessores}")
     }
 
-//    // Parte I - Item05. Criar um método na classe DigitalHouseManager que permita excluir um professor.
-//    // O método recebe como parâmetro o código do professor. O método deve utilizar o código do professor para
-//    // encontrá-lo na lista de professores e eliminá-lo da lista.
+    // Parte I - Item05. Criar um método na classe DigitalHouseManager que permita excluir um professor.
+    // O método recebe como parâmetro o código do professor. O método deve utilizar o código do professor para
+    // encontrá-lo na lista de professores e eliminá-lo da lista.
 
 
     fun excluirProfessor(codigoProfessor: Int) {
@@ -131,7 +129,7 @@ class DigitalHouseManger() {
         // utilização de loop for para passar pelos parâmetros de cada chave da lista de Professores:
         for (chave in listaDeProfessores) {
             if (chave.key == codigoProfessor) { // verifica se a posição chave.key == codigoProfessor.
-                auxChecaCodigoProfessor = true  // caso haja o códigoProfessor a variável auxChecaCodigoProfessor = true
+                auxChecaCodigoProfessor = true // caso haja o códigoProfessor a variável auxChecaCodigoProfessor = true
                 // armazena-se o valor da chave, para posteriormente excluir essa posição da lista de Professores
                 auxArmazenaPosicaoChave = chave.key
                 break // interrompe o laço for, pois, o códigoProfessor já foi encontrado.
@@ -146,26 +144,24 @@ class DigitalHouseManger() {
                     )
                 } foram excluídos!"
             )
-            listaDeProfessores.remove(auxArmazenaPosicaoChave)
+            listaDeProfessores.remove(auxArmazenaPosicaoChave) // exclui dados da listaDeProfessores
             //se caso não houver o códigoProfessor, retorna uma mensagem para verificar código digitado.
         } else {
             println("Código Professor: ${codigoProfessor} não foi excluído! Por Favor verifique o código digitado!")
         }
     }
 
+
     // Parte I - Item06. Criar um método na classe DigitalHouseManager que permita registrar um aluno. O método recebe
     // como parâmetros o nome, o sobrenome e o código do aluno. O método deve criar um aluno com os dados
     // correspondentes e adicioná-lo à lista de alunos.
-
-    var contadorAlunos = 0
 
     fun registrarAluno(nome: String, sobrenome: String, codigoAluno: Int) {
         // listaAuxAlunos = [nome, sobrenome]
         listaAuxAlunos = mutableListOf(nome, sobrenome)
         // listaAlunos = {key = codigoProfessor, value = listaAuxAlunos}
         listaAlunos.put(codigoAluno, listaAuxAlunos) // armazena dados na listaAlunos
-        println(listaAlunos)
-        contadorAlunos++ // acresce 1 ao contadorAlunos
+        println("Lista de Alunos: ${listaAlunos}")
     }
 
 
@@ -176,22 +172,18 @@ class DigitalHouseManger() {
         // Encontrar o aluno que queremos matricular:
         var auxChecaCodigoAluno = false //variavel aux para verificar se há a lista de Alunos contém o código digitado
         var auxPosicaoChaveAluno = 0 // / variavel auxiliar que armazena a posição da chave, caso haja o códigoAluno
-
+        // utilização de loop for para passar pelos parâmetros de cada chave da listaAlunos:
         for (codigo in listaAlunos) {
             if (codigo.key == codigoAluno) {
                 auxChecaCodigoAluno = true // caso haja o códigoAluno a variável auxChecaCodigoAluno = true
                 // armazena-se o valor da chave, para posteriormente utilizar os valores
                 auxPosicaoChaveAluno = codigo.key
-
                 break // interrompe o laço for, pois, o códigoAluno já foi encontrado.
             }
         }
-
         // caso o códigoAluno for encontrado, imprime na tela as informações do Aluno[nome, sobrenome]
         if (auxChecaCodigoAluno) {
             println("Aluno: ${listaAlunos[auxPosicaoChaveAluno]}")
-            //auxListaMatricula.clear()
-            auxListaMatricula.add(listaAlunos[auxPosicaoChaveAluno]!!)
             // caso o codigoAluno não seja encontrado, imprime a mensagem, para verificar o código!
         } else {
             println("Código do Aluno não encontrado! Por favor verifique o código digitado!")
@@ -201,7 +193,7 @@ class DigitalHouseManger() {
         var auxChecaCodigoCurso = false //variável aux para verificar se há a lista de curso contém o código digitado
         var auxPosicaoChaveCurso = 0 // variável auxiliar que armazena a posição da chave, caso haja o código digitado
         for (codigo in listaDeCurso) {
-            if (codigo.key == codigoCurso) { // checa se o valor da posição .key é igual ao codigoCurso
+            if (codigo.key == codigoCurso) { // checa se o valor da posição chave é igual ao codigoCurso
                 auxChecaCodigoCurso = true // caso haja o códigoCurso a variável auxChecaCodigoCurso = true
                 auxPosicaoChaveCurso = codigo.key // armazena o valor da posição key
                 break // interrompe o laço for, pois, o códigoAluno já foi encontrado.
@@ -217,65 +209,71 @@ class DigitalHouseManger() {
         }
 
         // Matricular o aluno, se for possível.
-
         // Para matricular o aluno, devemos verificar se o código do Aluno, e Código Curso estão corretos e verificar se
         // o curso desejado tem vagas disponíveis(quantidade máxima de Alunos), para posteriormente realizar a inclusão
         // da Matrícula.
 
+
+        // Implementando os "try e catch" para se caso houver alguma exceção, não venha parar o programa:
+
         // armazenando a informação da quantidade Máxima de Alunos em uma lista auxiliar!
         var auxLista = listaDeCurso[auxPosicaoChaveCurso]
-
-        // Implementando os try para se houver alguma exceção, não venha parar o programa:
         try {
             // Para acessar a variável quantidade máxima Alunos iremos converter as informações do curso em lista:
             // auxLista = [nomeCurso, quantidadeMaximaAlunos], convertendo auxLista para o tipo List
             auxLista = auxLista?.toList()
-        } catch (exceptionGeneric: Exception) {
-
+        } catch (exceptionGeneric: Exception) { // exception genérica
         }
-        // Implementando o try para converter a variável quantidadeMaximaAlunos para o tipo Int, a qual esta contida na
-        // auxLista = [nomeCurso, quantidadeMaximaAlunos]
+
+        // Implementando o "try e catch" se caso houver uma exceção para converter a variável quantidadeMaximaAlunos para
+        // o tipo Int, a qual esta contida na auxLista = [nomeCurso, quantidadeMaximaAlunos]
+
+        // A var auxQuantidadeMaximaAlunos será utilizada para verificar se há vagas para a realizar a matrícula nos cursos
         var auxQuantidadeMaximaAlunos: Int = 0 // var aux para a conversão de quantidadeMaximaAlunos no tipo Int:
         try {
             auxQuantidadeMaximaAlunos = auxLista?.get(1) as Int //convertendo var auxQuantidadeMaximaAlunos ao tipo Int
-        } catch (exceptionGeneric: Exception) {
-
+        } catch (exceptionGeneric: Exception) { // exception genérica
         }
-        // Implementando o try para armazenar a variável nomeDoCurso para o tipo Any, a qual esta contida na
+
+
+        // Implementando o "try e catch" para armazenar a variável nomeDoCurso para o tipo Any, a qual esta contida na
         // auxLista = [nomeCurso, quantidadeMaximaAlunos]
         var auxNomeDoCurso: Any = ""  // var aux para a conversão do nome do curso para o tipo: Any
         try {
             auxNomeDoCurso = auxLista?.get(0) as Any // armazenando o nome do curso
-        } catch (exceptionGeneric: Exception) {
-
+        } catch (exceptionGeneric: Exception) { // exception genérica
         }
+
 
         // Verifica se há vagas disponíveis do curso requerido, se o códigoAluno e códigoCurso estão corretos para poder
         // realizar a matrícula do Aluno no Curso.
-        var contadorAuxListaAlunos = 0
         if (auxQuantidadeMaximaAlunos > 0 && auxChecaCodigoAluno && auxChecaCodigoCurso) {
+            // havendo vagas e os códigos corretos, iremos executar a Matrícula.
             println("Vagas Disponíveis: ${auxQuantidadeMaximaAlunos}")
             println("Matrícula efetuada!")
 
-            // havendo vagas, iremos atualizar na ListaDeCurso a quantidadeMaximaAlunos
+            // havendo vagas e os códigos corretos, iremos atualizar na ListaDeCurso a quantidadeMaximaAlunos
             listaDeCurso.remove(auxPosicaoChaveCurso) // remove da listaDeCurso a informação antiga do respectivo curso
+
+
             // atualiza a lista de curso com as informações de quantidadeMaximaAlunos = (auxQuantidadeMaximaAlunos -1)
+            // listaAuxCurso = [auxNomeDoCurso, (auxQuantidadeMaximaAlunos - 1)]
             listaAuxCurso = mutableListOf(auxNomeDoCurso, (auxQuantidadeMaximaAlunos - 1)) // atualiza listaAuxCurso
+            //listaDeCurso = {key = codigoCurso, chave = listaAuxCurso}
             listaDeCurso.put(codigoCurso, listaAuxCurso) // armazena as novas informações na Lista de Cursos
 
-            println("Lista de Cursos: ${listaDeCurso}\n")
+            println("Lista de Cursos: ${listaDeCurso}\n") // imprime na tela as informações atualizadas
 
             // Adicionando os dados do Curso escolhido e os dados do aluno para a Lista de Matrícula:
             try {
-                // listaMatriculas = {[nome do Curso, quantidadeVagas] = [nome, sobrenome]}
+                // listaMatriculas = {key = [nome do Curso, quantidadeVagas], value = [nome, sobrenome]}
                 listaMatriculas.put(listaDeCurso[auxPosicaoChaveCurso]!!, listaAlunos[auxPosicaoChaveAluno]!!)
-            } catch (exceptionGeneric: Exception) {
-
+            } catch (exceptionGeneric: Exception) {  // exception genérica
             }
-
+            // caso não haja vagas no curso, imprime a mensagem abaixo:
         } else if (auxQuantidadeMaximaAlunos <= 0 && auxChecaCodigoCurso) {
             println("Não há vagas disponíveis para o curso solicitado!\n")
-            // caso o código do curso e código aluno estajam incorretos, imprime a mensagem:
+            // caso o código do curso e código aluno estejam incorretos, imprime a mensagem:
         } else {
             println("Matrícula não pode ser efetuada, por favor verifique os dados!\n")
         }
@@ -352,30 +350,33 @@ class DigitalHouseManger() {
         // caso seja encontrado o códigoProfTitular, irá imprimir as informações do Professor Adjunto:
         if (auxChecaCodigoProfAdjunto) {
             println("Código Professor Titular: ${listaDeProfessores[auxPosicaoChaveProfAdjunto]}")
-
             // caso não seja encontrado o código do Professor Adjunto, irá imprimir as informações para verificar código digitado!
         } else {
             println("Código do Professor Adjunto não encontrado! Por favor verifique o código digitado!")
         }
 
-        // se todos os parâmetros abaixos foram válidos, irá executar a função alocar
+        // se todos os parâmetros abaixos foram válidos, irá alocar os Professores Titular e Adjunto na Lista de Cursos:
         if (auxChecaCodigoDigitado && auxChecaCodigoProfTitular && auxChecaCodigoProfAdjunto) {
-            //var listaAlocaProf = mutableListOf<Any>()
+
+            // variáveis auxiliares para converter os valores das Listas para o tipo String:
+            // listaAlocaProf contém as informações antigas [nomedoCurso, quantidadeMaximaAlunos]
             var listaAlocaProf = listaDeCurso[auxArmazenaPosicaoChave].toString()
+            // informações Prof Titular = [nome, sobrenome, codigoProfessor, especialidade, tempoDeCasa]
             var auxProfTitular = listaDeProfessores[auxPosicaoChaveProfTitular].toString()
+            // informações Prof Adjunto = [nome, sobrenome, codigoProfessor, qteHorasMonitoria, tempoDeCasa]
             var auxProfAdjunto = listaDeProfessores[auxPosicaoChaveProfAdjunto].toString()
 
-
-            // havendo vagas, iremos atualizar na ListaDeCurso a quantidadeMaximaAlunos
+            // para alocar os dados dos Professores Titular e Professores Adjuntos, iremos remover a informação antiga
+            // referente ao código do curso.
             listaDeCurso.remove(auxArmazenaPosicaoChave) // remove da listaDeCurso a informação antiga do respectivo curso
-
-            // listaAuxCurso = mutableListOf(
-            listaAuxCurso = mutableListOf(listaAlocaProf, auxProfTitular, auxProfAdjunto) // atualiza listaAuxCurso
-            listaDeCurso.put(codigoCurso, listaAuxCurso) // armazena as novas informações na Lista de Cursos
-
+            // atualiza a listaAuxCurso com as informações das listas Auxiliares:
+            listaAuxCurso = mutableListOf(listaAlocaProf, auxProfTitular, auxProfAdjunto)
+            // armazena as novas informações na Lista de Cursos, com os dados dos Professores Titular e Adjunto:
+            listaDeCurso.put(codigoCurso, listaAuxCurso)
             println("Professores alocados na lista de Curso: ${listaDeCurso}")
 
-        } else{
+            //caso os parâmetros forem inválidos, imprime a mensagem abaixo:
+        } else {
             println("Professores não foram alocados na lista de Curso! Por favor verifique os dados cadastrados!")
         }
 
