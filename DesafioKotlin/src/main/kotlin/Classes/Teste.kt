@@ -100,7 +100,8 @@ fun main() {
 //    println("---------------------------------------------------------------------------------------------------------")
 //
 //    //PARTE G (item1): instanciando a classe Manager Digital House
-//    var managerDH = DigitalHouseManger()
+    var managerDH = DigitalHouseManger()
+
 //
 //    //PARTE H (item1): implementando a função registrarCurso()
 //    println("Lista de Cursos Registrados:")
@@ -205,4 +206,5 @@ fun main() {
 //
 //    println("---------------------------------------------------------------------------------------------------------")
 //
+
 }

@@ -379,7 +379,32 @@ class DigitalHouseManger() {
         } else {
             println("Professores não foram alocados na lista de Curso! Por favor verifique os dados cadastrados!")
         }
+    }
 
+    // Parte K
+    // 1. Como você modificaria o diagrama de classes para que um aluno possa consultar em que curso se matriculou?
+    // Criar um método para pesquisar na Lista de Matricula um determinado item.
+
+    // Pesquisar na lista de Matriculas pelo item: nome e sobrenome que será recebido como parâmetros pelo método consultaCurso():
+    fun consultaCurso(nome: String, sobrenome: String) {
+        var auxConsultaCurso = false
+        // utilização de 2 loops for para acessar as variáveis da Lista de Matrículas:
+        for (codigo in listaMatriculas) {
+            for (valor in codigo.value) {
+                // checa se o valor da posição valor contém o valor nome:
+                if (codigo.value.contains(nome) && codigo.value.contains(sobrenome) ) {
+                    print("O(a) Aluno(a) ${nome} ${sobrenome} esta Matrículado(a) no Curso: ")
+                    print(codigo.key) // imprime as informações do curso:
+                    println()
+                    auxConsultaCurso = true
+                    break // interrompe o laço for, pois, o nome e sobrenome já foram encontrados.
+                }
+            }
+        }
+        // caso o nome não esteja na ListaDeMatriculas, imprime a mensagem abaixo:
+        if(!auxConsultaCurso){
+            println("O(a) Aluno(a) ${nome} ${sobrenome} não esta matriculado! Verifique o nome e sobrenome digitado!")
+        }
     }
 
 }

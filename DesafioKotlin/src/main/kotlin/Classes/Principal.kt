@@ -81,6 +81,27 @@ fun main() {
     // As informações ficaram alocadas dentro da lista de Cursos:
     managerDH.alocarProfessores(20002, 77002, 88002)
 
+
+    println("---------------------------------------------------------------------------------------------------------")
+
+    // As informações ficaram alocadas dentro da lista de Cursos:
+    managerDH.consultaCurso("Minie", "Mouse")
+
+    println("---------------------------------------------------------------------------------------------------------")
+
+    // As informações ficaram alocadas dentro da lista de Cursos:
+    managerDH.consultaCurso("Huguinho", "Silva")
+
+    println("---------------------------------------------------------------------------------------------------------")
+
+    // As informações ficaram alocadas dentro da lista de Cursos, testando com um nome que não esta na lista:
+    managerDH.consultaCurso("Zezinho", "Oliveira")
+
+    println("---------------------------------------------------------------------------------------------------------")
+
+    // As informações ficaram alocadas dentro da lista de Cursos, testando com um nome que não esta na lista:
+    managerDH.consultaCurso("Batman", "Bat")
+
     println("---------------------------------------------------------------------------------------------------------")
 
 }
